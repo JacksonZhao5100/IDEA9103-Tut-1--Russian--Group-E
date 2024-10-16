@@ -27,3 +27,11 @@ These circles will be separated in several classes which includes Circle in trun
 
 [Link to Image and artworks information](https://www.anwarshemza.com/publiccollections1.html)
 
+## Section1_Selina
+In the course of persuing a website that preseented the artist Anwer Jalal Shemza, I came across a quotation from 1962 that I found particularly inspiring. “One circle, one square, one problem, one life is not enough to solve it”.This statement reflects the profound philosophical depth underlying his utilisation of elementary geometricshapes, such as ciecles and squares, which are pervasive in his oeuvre. These forms evoke a sense of simplicity while simultaneously alluding to complex concepts. This promptd me to reflect on the potential for geometric shapes to convey more profound meanings, particularly when they are repeated or combined in a series.
+
+The artwork selected for representation is an apple tree painting by Shemza, which is included in the project. It is noteworthy that the artist has produced a number of works bearing the same title, which may be indicative of  a potential connection or evolutionn between these pieces. The recurrent deployment of elementary forms such as ciecles and squares across his paintings bestows upon them a unified aesthetic interpretation that extends beyond the surface.
+
+Furthermore, I was inspired by the concept of animating static artworks,as examplified by the Starry Night animation video, which adds depth and movement to the original painting. In the aforementioned video, the addition of swirling skies and glowing stars imbues the original painting with a dynamic quality. It seems reasonable to suggest that a similar approach could be applied to Shemza's Apple Tree paintings. The utilisation of animation enables an investigation into the visual transformation between the two paintings, thereby facilitating the establishment of an evolving relationship between them. This method allows us to emphasise Shemza's geometric simplicity while establishing a more visually engaging connection between the two pieces.
+
+[link to Precedents3](https://www.youtube.com/watch?v=Ph1SEFWcL58)
