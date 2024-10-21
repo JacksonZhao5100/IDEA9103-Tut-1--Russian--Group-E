@@ -1,10 +1,11 @@
+//Initalisation
 let growthSpeed = 0.5; // Speed at which the circles grow
 let maxSize = 50; // Maximum size of the circles (apples)
 let circleSizes = []; // Array to store sizes of circles for animation
 let noiseOffsets = []; // Array to store noise offsets for each circle's movement
 
 function setup() {
-  createCanvas(800, 1000);
+  createCanvas(windowWidth, windowHeight); // The canvas is set to the windows width and height.
   background(50, 70, 100); // Background similar to the textured blue tone
 
   // Initialize circle sizes and noise offsets for animation
@@ -113,4 +114,8 @@ function drawLine(x1, y1, x2, y2) {
   stroke(100, 50, 50, 150); // Soft brownish color for branches
   strokeWeight(3);
   line(x1, y1, x2, y2);
+}
+
+function resizeCanvas(){
+  resizeCanvas(windowWidth, windowHeight);
 }
