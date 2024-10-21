@@ -1,5 +1,5 @@
 //Initalisation
-let growthSpeed = 0.5; // Speed at which the circles grow
+let growthSpeed = 0.5; // Speed at which the circles move at
 let maxSize = 50; // Maximum size of the circles (apples)
 let circleSizes = []; // Array to store sizes of circles for animation
 let noiseOffsets = []; // Array to store noise offsets for each circle's movement
@@ -35,16 +35,16 @@ function drawBaseStructure() {
   fill(150, 180, 100); // Yellowish tone for the base
   noStroke();
   rectMode(CENTER);
-  rect(width / 2, height - 150, 300, 80);
+  rect(width / 2, height - 150, 300, 80); // The demensions of the rectangle
 
-  fill(80, 160, 90); // Green tone for details
+  fill(80, 160, 90); // Green tone for semi-circles
   for (let i = 0; i < 5; i++) {
-    arc(width / 2 - 120 + i * 60, height - 150, 60, 60, PI, 0);
+    arc(width / 2 - 120 + i * 60, height - 150, 60, 60, PI, 0); // The location of the green semicircles
   }
 
   fill(200, 60, 60); // Red tone for semi-circles
-  for (let i = 0; i < 5; i++) {
-    arc(width / 2 - 90 + i * 60, height - 150, 60, 60, 0, PI);
+  for (let i = 0; i < 4; i++) {
+    arc(width / 2 - 90 + i * 60, height - 150, 60, 60, 0, PI); // The location of the red semicircles
   }
 }
 
@@ -58,19 +58,19 @@ function drawCircles() {
   currentIndex += 6; // Increment index for next set of circles
 
   // Draw branches with circles
-  drawHorizontalCircles(width / 2, height - 450, 4, circleSize, -1, currentIndex);
+  drawHorizontalCircles(width / 2, height - 450, 4, circleSize, -1, currentIndex); // The location of the circles on the middle left branch of the tree
   currentIndex += 4;
-  drawHorizontalCircles(width / 2, height - 450, 4, circleSize, 1, currentIndex);
+  drawHorizontalCircles(width / 2, height - 450, 4, circleSize, 1, currentIndex); // The location of the circles on the middle right branch of the tree
   currentIndex += 4;
 
-  drawHorizontalCircles(width / 2, height - 350, 3, circleSize, -1, currentIndex);
+  drawHorizontalCircles(width / 2, height - 350, 3, circleSize, -1, currentIndex); // The location of the cirles on the bottom left branch of the tree
   currentIndex += 3;
-  drawHorizontalCircles(width / 2, height - 350, 3, circleSize, 1, currentIndex);
+  drawHorizontalCircles(width / 2, height - 350, 3, circleSize, 1, currentIndex); // The location of the circles on the bottom right branch of the tree
   currentIndex += 3;
 
   drawHorizontalCircles(width / 2, height - 550, 2, circleSize, -1, currentIndex);
-  currentIndex += 2;
-  drawHorizontalCircles(width / 2, height - 550, 2, circleSize, 1, currentIndex);
+  currentIndex += 2; // The loaction of the circles on the top left branch of the tree
+  drawHorizontalCircles(width / 2, height - 550, 2, circleSize, 1, currentIndex); // The location of the circles on the top right branch of the tree
 }
 
 // Draw vertical circles (trunk-like structure) with Perlin noise
