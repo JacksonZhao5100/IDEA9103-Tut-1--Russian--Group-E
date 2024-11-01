@@ -85,6 +85,11 @@ function drawBaseStructure(scaleFactor) {
   for (let i = 0; i < 4; i++) {
     arc(width / 2 - 90 + i * 60, height - 150*scaleFactor, 60*scaleFactor, 60*scaleFactor, 0, PI);
   }
+
+  // The circle refreshes, to change the speed of this the number after framecount needs to be changed.
+  if (frameCount % 100 ===maxSize){
+    resetCircleSize()
+  }
 }
 
 // Draw circles for tree trunk and branches with noise-based sway

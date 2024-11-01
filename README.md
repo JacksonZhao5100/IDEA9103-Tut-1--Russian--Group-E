@@ -9,6 +9,7 @@ This artwork is shown below:
 
 <img src="Images/Anwar%20Jalal%20Shemza%20Apple%20Tree.jpeg" alt="" width="400">
 
+Shemza took strong inspriation from the Biblical Genesis story of the Garden of Eden. The tree in his artwork thus reports the Tree of Knowledge which Eve takes the forbidden fruit from. This represents the two sides of the human experience, one being the persuit of knoweldge and the freedom which it can give and its potential downfall.
 
 The same characteristics also shown in other artworks by Anwar such as: 
 
