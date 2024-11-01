@@ -30,7 +30,7 @@ function setup() {
 function draw() {
   // Calculate current background color (transitioning from night to sunrise, daytime, and then sunset)
 
-  let scaleFactor = min(width, height) / 1000;
+  let scaleFactor = min(windowWidth, windowHeight) / 700; //scaleFactor is used to reshape the sizes of the fruit and the tree as the window grows and shrinks.
 
   let timeOfDay = frameCount % dayLength;
   let r, g, b;
@@ -83,14 +83,12 @@ function drawBaseStructure(scaleFactor) {
 
   fill(200, 60, 60); // Red semi-circles
   for (let i = 0; i < 4; i++) {
-    arc(width / 2 - 90 + i * 60*scaleFactor, height - 150*scaleFactor, 60*scaleFactor, 60*scaleFactor, 0, PI);
+    arc(width / 2 - 90 + i * 60, height - 150*scaleFactor, 60*scaleFactor, 60*scaleFactor, 0, PI);
   }
 }
 
 // Draw circles for tree trunk and branches with noise-based sway
 function drawCircles(scaleFactor) {
-  // width = windowWidth;
-  // height = windowHeight;
   let currentIndex = 0;
   let circleSize = 50*scaleFactor;
 
@@ -110,6 +108,11 @@ function drawCircles(scaleFactor) {
   drawHorizontalCircles(width / 2, height - 550*scaleFactor, 2, circleSize, -1, currentIndex, scaleFactor);
   currentIndex += 2;
   drawHorizontalCircles(width / 2, height - 550*scaleFactor, 2, circleSize, 1, currentIndex, scaleFactor);
+
+  // The circle refreshes, to change the speed of this the number after framecount needs to be changed.
+  if (frameCount % 100 ===maxSize){
+    resetCircleSize()
+  }
 }
 
 // Draw vertical circles (trunk) with sway effect
@@ -159,8 +162,8 @@ function drawLine(x1, y1, x2, y2) {
   line(x1, y1, x2, y2);
 }
 
-// Reset circle sizes on mouse click
-function mousePressed() {
+// The circles get reset with this function.
+function resetCircleSize(){
   for (let i = 0; i < circleSizes.length; i++) {
     circleSizes[i] = 0;
   }
