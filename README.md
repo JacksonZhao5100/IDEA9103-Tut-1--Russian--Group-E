@@ -5,6 +5,8 @@ The artwork that we chose is Apple Tree by Anwar Jalal Shemza.
 Apple Tree was created in 1962, which is a part of exploration of organic forms. In Apple Tree, Anwar uses repeated circular and linear patterns to represent the structure of tree, which created a sense of balance and rhythm.
 
 This artwork is shown below:
+
+
 <img src="Images/Anwar%20Jalal%20Shemza%20Apple%20Tree.jpeg" alt="" width="400">
 
 
