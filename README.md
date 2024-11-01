@@ -12,23 +12,19 @@ The same characteristics also shown in other artworks by Anwar such as:
 ##### Composition in Red and Green, 1963.
 <img src="Images/t14768-10-orig_orig.jpeg" alt="" width="400">
 
-![Composition in Red and Green, 1963.](Images/t14768-10-orig_orig.jpeg)
 
 ##### Meem Two 1967.
 <img src="Images/9800343-orig_orig.jpeg" alt="" width="400">
 
-![Meem Two 1967.](Images/9800343-orig_orig.jpeg)
 
 ##### Apple Trees, 1970.
 <img src="Images/anwar-jalal-shemza-apple-trees-361-orig_orig.jpeg" alt="" width="400">
 
-![Apple Trees, 1970.](Images/anwar-jalal-shemza-apple-trees-361-orig_orig.jpeg)
 
 ##### Composition with a Number Six, 1966
 
 <img src="Images/22224-842-orig_orig.jpeg" alt="" width="400">
 
-![Composition with a Number Six, 1966](Images/22224-842-orig_orig.jpeg)
 
 
 The reason that Apple Tree has been chosen is because it can be created in the same method with JavaScript and specifically p5.js, which leads itself to use simple geometric shapes to create natural artworks similar to what Anwar has created. This has inspired the group to follow a similar trend by using simple geometric shapes and lines to create nature based artworks in code. Also, this concept helps the group understand how to use JavaScript to generate the structural layout of branches and leaves obersved in Anwar's work. Similarly, we will use the concept of generative art to repeat the lines of branches and leaves to build the complexity of the work.
