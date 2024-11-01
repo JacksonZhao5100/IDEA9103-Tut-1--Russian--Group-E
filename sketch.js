@@ -1,5 +1,5 @@
 // Dynamic background color variables
-let dayLength = 600; // Duration of a day (in frames)
+let dayLength = 1000; // Duration of a day (in frames)
 let sunriseColor, noonColor, sunsetColor, nightColor;
 
 // Tree animation variables
@@ -29,10 +29,13 @@ function setup() {
 
 function draw() {
   // Calculate current background color (transitioning from night to sunrise, daytime, and then sunset)
+
+  let scaleFactor = min(width, height) / 1000;
+
   let timeOfDay = frameCount % dayLength;
   let r, g, b;
   if (timeOfDay < dayLength / 4) { // Sunrise
-    let sunriseProgress = sin(map(timeOfDay, 0, dayLength / 4, -HALF_PI, HALF_PI));
+    let sunriseProgress = sin(map(timeOfDay, 0, dayLength / 2, -HALF_PI, HALF_PI));
     r = lerp(red(nightColor), red(sunriseColor), sunriseProgress);
     g = lerp(green(nightColor), green(sunriseColor), sunriseProgress);
     b = lerp(blue(nightColor), blue(sunriseColor), sunriseProgress);
@@ -55,86 +58,88 @@ function draw() {
   background(r, g, b); // Set background color
 
   // Draw tree animation
-  drawBaseStructure();
-  drawCircles();
+  drawBaseStructure(scaleFactor);
+  drawCircles(scaleFactor);
 
   // Control growth of circle sizes
   for (let i = 0; i < circleSizes.length; i++) {
-    if (circleSizes[i] < maxSize) {
-      circleSizes[i] += growthSpeed;
+    if (circleSizes[i] < maxSize*scaleFactor) {
+      circleSizes[i] += growthSpeed*scaleFactor;
     }
   }
 }
 
 // Draw the base structure (flowerpot)
-function drawBaseStructure() {
+function drawBaseStructure(scaleFactor) {
   fill(150, 180, 100); // Pot color
   noStroke();
   rectMode(CENTER);
-  rect(width / 2, height - 150, 300, 80);
+  rect(width / 2, height - 150*scaleFactor, 300*scaleFactor, 80*scaleFactor);
 
   fill(80, 160, 90); // Green semi-circles
   for (let i = 0; i < 5; i++) {
-    arc(width / 2 - 120 + i * 60, height - 150, 60, 60, PI, 0);
+    arc(width / 2 - 120 + i * 60, height - 150*scaleFactor, 60*scaleFactor, 60*scaleFactor, PI, 0);
   }
 
   fill(200, 60, 60); // Red semi-circles
   for (let i = 0; i < 4; i++) {
-    arc(width / 2 - 90 + i * 60, height - 150, 60, 60, 0, PI);
+    arc(width / 2 - 90 + i * 60*scaleFactor, height - 150*scaleFactor, 60*scaleFactor, 60*scaleFactor, 0, PI);
   }
 }
 
 // Draw circles for tree trunk and branches with noise-based sway
-function drawCircles() {
+function drawCircles(scaleFactor) {
+  // width = windowWidth;
+  // height = windowHeight;
   let currentIndex = 0;
-  let circleSize = 50;
+  let circleSize = 50*scaleFactor;
 
-  drawVerticalCircles(width / 2, height - 200, 6, circleSize, currentIndex);
+  drawVerticalCircles(width / 2, height - 200*scaleFactor, 6, circleSize, currentIndex, scaleFactor);
   currentIndex += 6;
 
-  drawHorizontalCircles(width / 2, height - 450, 4, circleSize, -1, currentIndex);
+  drawHorizontalCircles(width / 2, height - 450*scaleFactor, 4, circleSize, -1, currentIndex, scaleFactor);
   currentIndex += 4;
-  drawHorizontalCircles(width / 2, height - 450, 4, circleSize, 1, currentIndex);
+  drawHorizontalCircles(width / 2, height - 450*scaleFactor, 4, circleSize, 1, currentIndex, scaleFactor);
   currentIndex += 4;
 
-  drawHorizontalCircles(width / 2, height - 350, 3, circleSize, -1, currentIndex);
+  drawHorizontalCircles(width / 2, height - 350*scaleFactor, 3, circleSize, -1, currentIndex, scaleFactor);
   currentIndex += 3;
-  drawHorizontalCircles(width / 2, height - 350, 3, circleSize, 1, currentIndex);
+  drawHorizontalCircles(width / 2, height - 350*scaleFactor, 3, circleSize, 1, currentIndex, scaleFactor);
   currentIndex += 3;
 
-  drawHorizontalCircles(width / 2, height - 550, 2, circleSize, -1, currentIndex);
+  drawHorizontalCircles(width / 2, height - 550*scaleFactor, 2, circleSize, -1, currentIndex, scaleFactor);
   currentIndex += 2;
-  drawHorizontalCircles(width / 2, height - 550, 2, circleSize, 1, currentIndex);
+  drawHorizontalCircles(width / 2, height - 550*scaleFactor, 2, circleSize, 1, currentIndex, scaleFactor);
 }
 
 // Draw vertical circles (trunk) with sway effect
-function drawVerticalCircles(x, y, count, size, indexStart) {
-  let sway = map(noise(swayNoiseOffset + frameCount * 0.01), 0, 1, -5, 5); // Calculate sway
+function drawVerticalCircles(x, y, count, size, indexStart, scaleFactor) {
+  let sway = map(noise(swayNoiseOffset + frameCount * 0.01), 0, 1, -5*scaleFactor, 5*scaleFactor); // Calculate sway
 
   for (let i = 0; i < count; i++) {
-    let noiseX = map(noise(noiseOffsets[indexStart + i] + frameCount * 0.01), 0, 1, -10, 10);
-    let noiseY = map(noise(noiseOffsets[indexStart + i] + 1000 + frameCount * 0.01), 0, 1, -10, 10);
+    let noiseX = map(noise(noiseOffsets[indexStart + i] + frameCount * 0.01), 0, 1, -10*scaleFactor, 10*scaleFactor);
+    let noiseY = map(noise(noiseOffsets[indexStart + i] + 1000 + frameCount * 0.01), 0, 1, -10*scaleFactor, 10*scaleFactor);
     let circleSize = circleSizes[indexStart + i];
     drawColoredCircle(x + noiseX + sway, y - i * size * 1.2 + noiseY, circleSize);
 
     if (i > 0) {
-      drawLine(x + sway, y - (i - 1) * size * 1.2, x + sway, y - i * size * 1.2);
+      drawLine(x + sway, y - (i - 1) * size * 1.2, x + sway, y - i * size * 1.2), scaleFactor;
     }
   }
 }
 
 // Draw horizontal circles (branches) with sway effect
-function drawHorizontalCircles(x, y, count, size, direction, indexStart) {
-  let sway = map(noise(swayNoiseOffset + frameCount * 0.01), 0, 1, -5, 5); // Calculate sway
+function drawHorizontalCircles(x, y, count, size, direction, indexStart, scaleFactor) {
+  let sway = map(noise(swayNoiseOffset + frameCount * 0.01), 0, 1, -5*scaleFactor, 5*scaleFactor); // Calculate sway
 
   for (let i = 1; i <= count; i++) {
-    let noiseX = map(noise(noiseOffsets[indexStart + i - 1] + frameCount * 0.01), 0, 1, -10, 10);
-    let noiseY = map(noise(noiseOffsets[indexStart + i - 1] + 1000 + frameCount * 0.01), 0, 1, -10, 10);
+    let noiseX = map(noise(noiseOffsets[indexStart + i - 1] + frameCount * 0.01), 0, 1, -10*scaleFactor, 10*scaleFactor);
+    let noiseY = map(noise(noiseOffsets[indexStart + i - 1] + 1000 + frameCount * 0.01), 0, 1, -10*scaleFactor, 10*scaleFactor);
     let xPos = x + i * size * 1.2 * direction + noiseX + sway;
     let circleSize = circleSizes[indexStart + i - 1];
     drawColoredCircle(xPos, y + noiseY, circleSize);
 
-    drawLine(x + sway, y, xPos, y + noiseY);
+    drawLine(x + sway, y, xPos, y + noiseY, scaleFactor);
   }
 }
 
