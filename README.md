@@ -10,14 +10,24 @@ This artwork is shown below:
 The same characteristics also shown in other artworks by Anwar such as: 
 
 ##### Composition in Red and Green, 1963.
-<img src="Images/t14768-10-orig_orig.jpeg" alt="" width="500">
+<img src="Images/t14768-10-orig_orig.jpeg" alt="" width="400">
 
 ![Composition in Red and Green, 1963.](Images/t14768-10-orig_orig.jpeg)
+
 ##### Meem Two 1967.
+<img src="Images/9800343-orig_orig.jpeg" alt="" width="400">
+
 ![Meem Two 1967.](Images/9800343-orig_orig.jpeg)
+
 ##### Apple Trees, 1970.
+<img src="Images/anwar-jalal-shemza-apple-trees-361-orig_orig.jpeg" alt="" width="400">
+
 ![Apple Trees, 1970.](Images/anwar-jalal-shemza-apple-trees-361-orig_orig.jpeg)
+
 ##### Composition with a Number Six, 1966
+
+<img src="Images/22224-842-orig_orig.jpeg" alt="" width="400">
+
 ![Composition with a Number Six, 1966](Images/22224-842-orig_orig.jpeg)
 
 
