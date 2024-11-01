@@ -10,7 +10,7 @@ This artwork is shown below:
 The same characteristics also shown in other artworks by Anwar such as: 
 
 ##### Composition in Red and Green, 1963.
-<img src="Images/t14768-10-orig_orig.jpeg" alt="" width="">
+<img src="Images/t14768-10-orig_orig.jpeg" alt="" width="200">
 ![Composition in Red and Green, 1963.](Images/t14768-10-orig_orig.jpeg)
 ##### Meem Two 1967.
 ![Meem Two 1967.](Images/9800343-orig_orig.jpeg)
