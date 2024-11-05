@@ -87,6 +87,12 @@ function draw() {
   }
   background(r, g, b); // Set background color
 
+  // Clouds move across the window
+  for (let cloud of clouds){
+    cloud.move();
+    cloud.show();
+  }
+
   // Draw tree animation
   drawBaseStructure(scaleFactor);
   drawCircles(scaleFactor);
@@ -96,12 +102,6 @@ function draw() {
     if (circleSizes[i] < maxSize*scaleFactor) {
       circleSizes[i] += growthSpeed*scaleFactor;
     }
-  }
-
-  // Clouds move across the window
-  for (let cloud of clouds){
-    cloud.move();
-    cloud.show();
   }
 }
 
