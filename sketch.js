@@ -9,6 +9,34 @@ let circleSizes = [];
 let noiseOffsets = [];
 let swayNoiseOffset; // Noise offset for sway effect
 
+// Clouds
+let clouds = [];
+
+// Class for the clouds
+class Cloud{
+  constructor(x, y){
+    this.x = x;
+    this.y = y;
+    this.size = random(50, 100); // this is the base size of the clouds
+  }
+
+  move(){
+    this.x += 1; // Speed of the clouds, to make it go faster increase the number.
+    if (this.x> width + this.size){
+      this.x = -this.size // This resets the clouds when they go off the screen.
+    }
+  }
+
+  show(){
+    noStroke();
+    fill(255);
+    // Below this is the shape of the clouds
+    ellipse(this.x, this.y, this.size);
+    ellipse(this.x +this.size *0.5, this.y + this.size *0.2, this.size*0.8);
+    ellipse(this.x - this.size * 0.5, this.y + this.size *0.2, this.size *0.8);
+  }
+}
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
@@ -25,6 +53,8 @@ function setup() {
     circleSizes.push(0);          // Initial size of all circles is 0
     noiseOffsets.push(random(1000)); // Random noise offset for each circle
   }
+
+  initaliseClouds();
 }
 
 function draw() {
@@ -66,6 +96,12 @@ function draw() {
     if (circleSizes[i] < maxSize*scaleFactor) {
       circleSizes[i] += growthSpeed*scaleFactor;
     }
+  }
+
+  // Clouds move across the window
+  for (let cloud of clouds){
+    cloud.move();
+    cloud.show();
   }
 }
 
@@ -167,6 +203,15 @@ function drawLine(x1, y1, x2, y2) {
   line(x1, y1, x2, y2);
 }
 
+// Initialise Clouds
+function initaliseClouds(){
+  clouds = []; // This clears the excisiting clouds
+  for (let i= 0; i<5; i++){
+    clouds.push(new Cloud(random(width), random(50,150)));
+  }
+}
+
+
 // The circles get reset with this function.
 function resetCircleSize(){
   for (let i = 0; i < circleSizes.length; i++) {
@@ -177,4 +222,5 @@ function resetCircleSize(){
 // Adjust canvas size on window resize
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+  initaliseClouds() // The clouds get reset everytime the canvas gets adjusted.
 }
