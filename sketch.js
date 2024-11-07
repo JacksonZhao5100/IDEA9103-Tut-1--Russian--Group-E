@@ -258,7 +258,7 @@ function drawColoredCircle(x, y, size, isGolden = false) {
 // Draw connecting line for branches
 function drawLine(x1, y1, x2, y2) {
   stroke(100, 50, 50, 150);
-  strokeWeight(5);
+  strokeWeight(3);
   line(x1, y1, x2, y2);
 }
 
