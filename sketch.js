@@ -3,8 +3,8 @@ let dayLength = 1000; // Duration of a day (in frames)
 let sunriseColor, noonColor, sunsetColor, nightColor;
 
 // Tree animation variables
-let growthSpeed = 0.5;
-let maxSize = 50;
+let growthSpeed = 0.4;
+let maxSize = 40;
 let circleSizes = [];
 let noiseOffsets = [];
 let swayNoiseOffset; // Noise offset for sway effect
@@ -13,7 +13,7 @@ class Cloud {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.size = random(50, 100);
+    this.size = random(windowWidth/40, windowWidth/20); //The size of the clouds changes with the size of window
   }
 
   move() {
@@ -156,7 +156,7 @@ function drawBaseStructure(scaleFactor) {
   fill(150, 180, 100); // Pot color
   noStroke();
   rectMode(CENTER);
-  rect(width / 2, height - 150*scaleFactor, 300*scaleFactor, 80*scaleFactor);
+  rect(width / 2, height - 150*scaleFactor, 350*scaleFactor, 80*scaleFactor);
 
   fill(80, 160, 90); // Green semi-circles
   for (let i = 0; i < 5; i++) {
@@ -169,7 +169,7 @@ function drawBaseStructure(scaleFactor) {
   }
 
   // The circle refreshes, to change the speed of this the number after framecount needs to be changed.
-  if (frameCount % 100 === maxSize){
+  if (frameCount % 300 === maxSize){
     resetCircleSize();
   }
 }
@@ -197,7 +197,7 @@ function drawCircles(scaleFactor) {
   drawHorizontalCircles(width / 2, height - 550*scaleFactor, 2, circleSize, 1, currentIndex, scaleFactor);
 
   // The circle refreshes, to change the speed of this the number after framecount needs to be changed.
-  if (frameCount % 100 === maxSize){
+  if (frameCount % 300 === maxSize){
     resetCircleSize();
   }
 }
@@ -211,6 +211,10 @@ function drawVerticalCircles(x, y, count, size, indexStart, scaleFactor) {
     let noiseY = map(noise(noiseOffsets[indexStart + i] + 1000 + frameCount * 0.01), 0, 1, -10*scaleFactor, 10*scaleFactor);
     let circleSize = circleSizes[indexStart + i];
     drawColoredCircle(x + noiseX + sway, y - i * size * 1.2 + noiseY, circleSize);
+    // Set the first circle as golden
+    let isGolden = (i === 3); // Change this index to make a different circle golden
+
+    drawColoredCircle(x + noiseX + sway, y - i * size * 1.2 + noiseY, circleSize, isGolden);
 
     if (i > 0) {
       drawLine(x + sway, y - (i - 1) * size * 1.2, x + sway, y - i * size * 1.2);
@@ -228,24 +232,33 @@ function drawHorizontalCircles(x, y, count, size, direction, indexStart, scaleFa
     let xPos = x + i * size * 1.2 * direction + noiseX + sway;
     let circleSize = circleSizes[indexStart + i - 1];
     drawColoredCircle(xPos, y + noiseY, circleSize);
+    
 
     drawLine(x + sway, y, xPos, y + noiseY);
   }
 }
 
-// Draw a circle with alternating red and green halves
-function drawColoredCircle(x, y, size) {
+// Draw a circle with alternating red and green halves, and one with gold
+function drawColoredCircle(x, y, size, isGolden = false) {
   noStroke();
-  fill(200, 60, 60); // Red top half
-  arc(x, y, size, size, PI, 0);
-  fill(80, 160, 90); // Green bottom half
-  arc(x, y, size, size, 0, PI);
+  if (isGolden) {
+    fill(255, 215, 0); // Gold color for the top half
+    arc(x, y, size, size, PI, 0);
+    fill(218, 165, 32); // Darker gold for the bottom half
+    arc(x, y, size, size, 0, PI);
+  } else {
+    fill(200, 60, 60); // Red top half
+    arc(x, y, size, size, PI, 0);
+    fill(80, 160, 90); // Green bottom half
+    arc(x, y, size, size, 0, PI);
+  }
 }
+
 
 // Draw connecting line for branches
 function drawLine(x1, y1, x2, y2) {
   stroke(100, 50, 50, 150);
-  strokeWeight(3);
+  strokeWeight(5);
   line(x1, y1, x2, y2);
 }
 
@@ -253,7 +266,7 @@ function drawLine(x1, y1, x2, y2) {
 function initaliseClouds(){
   clouds = []; // This clears the excisiting clouds
   for (let i = 0; i < 5; i++){
-    clouds.push(new Cloud(random(width), random(50,150)));
+    clouds.push(new Cloud(random(width), random(windowWidth/40,windowWidth/10)));
   }
 }
 
