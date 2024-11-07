@@ -1,9 +1,5 @@
 // Dynamic background color variables
-<<<<<<< Updated upstream
 let dayLength = 1000; // Duration of a day (in frames)
-=======
-let dayLength = 600; // Duration of a day (in frames)
->>>>>>> Stashed changes
 let sunriseColor, noonColor, sunsetColor, nightColor;
 
 // Tree animation variables
@@ -12,37 +8,80 @@ let maxSize = 50;
 let circleSizes = [];
 let noiseOffsets = [];
 let swayNoiseOffset; // Noise offset for sway effect
-<<<<<<< Updated upstream
 
-// Clouds
-let clouds = [];
-
-// Class for the clouds
-class Cloud{
-  constructor(x, y){
+class Cloud {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.size = random(50, 100); // this is the base size of the clouds
+    this.size = random(50, 100);
   }
 
-  move(){
-    this.x += 1; // Speed of the clouds, to make it go faster increase the number.
-    if (this.x> width + this.size){
-      this.x = -this.size // This resets the clouds when they go off the screen.
+  move() {
+    this.x += 1;
+    if (this.x > width + this.size) {
+      this.x = -this.size;
     }
   }
 
-  show(){
+  show() {
     noStroke();
-    fill(255);
-    // Below this is the shape of the clouds
-    ellipse(this.x, this.y, this.size);
-    ellipse(this.x +this.size *0.5, this.y + this.size *0.2, this.size*0.8);
-    ellipse(this.x - this.size * 0.5, this.y + this.size *0.2, this.size *0.8);
+    
+    // Get current background color
+    let timeOfDay = frameCount % dayLength;
+    let currentBgColor;
+    
+    if (timeOfDay < dayLength / 4) { // Sunrise
+      let sunriseProgress = sin(map(timeOfDay, 0, dayLength / 2, -HALF_PI, HALF_PI));
+      currentBgColor = color(
+        lerp(red(nightColor), red(sunriseColor), sunriseProgress),
+        lerp(green(nightColor), green(sunriseColor), sunriseProgress),
+        lerp(blue(nightColor), blue(sunriseColor), sunriseProgress)
+      );
+    } else if (timeOfDay < dayLength / 2) { // Daytime
+      let dayProgress = sin(map(timeOfDay, dayLength / 4, dayLength / 2, -HALF_PI, HALF_PI));
+      currentBgColor = color(
+        lerp(red(sunriseColor), red(noonColor), dayProgress),
+        lerp(green(sunriseColor), green(noonColor), dayProgress),
+        lerp(blue(sunriseColor), blue(noonColor), dayProgress)
+      );
+    } else if (timeOfDay < (3 * dayLength) / 4) { // Sunset
+      let sunsetProgress = sin(map(timeOfDay, dayLength / 2, (3 * dayLength) / 4, -HALF_PI, HALF_PI));
+      currentBgColor = color(
+        lerp(red(noonColor), red(sunsetColor), sunsetProgress),
+        lerp(green(noonColor), green(sunsetColor), sunsetProgress),
+        lerp(blue(noonColor), blue(sunsetColor), sunsetProgress)
+      );
+    } else { // Night
+      let nightProgress = sin(map(timeOfDay, (3 * dayLength) / 4, dayLength, -HALF_PI, HALF_PI));
+      currentBgColor = color(
+        lerp(red(sunsetColor), red(nightColor), nightProgress),
+        lerp(green(sunsetColor), green(nightColor), nightProgress),
+        lerp(blue(sunsetColor), blue(nightColor), nightProgress)
+      );
+    }
+    
+    // Create gradient effect for each cloud element
+    for (let i = 0; i <= this.size; i += 2) {
+      // Make cloud color lighter than background
+      let cloudColor = color(
+        min(red(currentBgColor) + 40, 255),
+        min(green(currentBgColor) + 40, 255),
+        min(blue(currentBgColor) + 40, 255)
+      );
+      
+      // Create gradient from top to bottom
+      let alpha = map(i, 0, this.size, 255, 180);
+      cloudColor.setAlpha(alpha);
+      fill(cloudColor);
+
+      // Draw cloud shapes with gradient
+      let yOffset = map(i, 0, this.size, 0, this.size * 0.2);
+      ellipse(this.x, this.y + yOffset, this.size - i);
+      ellipse(this.x + this.size * 0.5, this.y + this.size * 0.2 + yOffset, (this.size - i) * 0.8);
+      ellipse(this.x - this.size * 0.5, this.y + this.size * 0.2 + yOffset, (this.size - i) * 0.8);
+    }
   }
 }
-=======
->>>>>>> Stashed changes
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -66,7 +105,6 @@ function setup() {
 
 function draw() {
   // Calculate current background color (transitioning from night to sunrise, daytime, and then sunset)
-<<<<<<< Updated upstream
 
   let scaleFactor = min(windowWidth, windowHeight) / 700; //scaleFactor is used to reshape the sizes of the fruit and the tree as the window grows and shrinks.
 
@@ -109,47 +147,11 @@ function draw() {
   for (let i = 0; i < circleSizes.length; i++) {
     if (circleSizes[i] < maxSize*scaleFactor) {
       circleSizes[i] += growthSpeed*scaleFactor;
-=======
-  let timeOfDay = frameCount % dayLength;
-  let r, g, b;
-  if (timeOfDay < dayLength / 4) { // Sunrise
-    let sunriseProgress = sin(map(timeOfDay, 0, dayLength / 4, -HALF_PI, HALF_PI));
-    r = lerp(red(nightColor), red(sunriseColor), sunriseProgress);
-    g = lerp(green(nightColor), green(sunriseColor), sunriseProgress);
-    b = lerp(blue(nightColor), blue(sunriseColor), sunriseProgress);
-  } else if (timeOfDay < dayLength / 2) { // Daytime
-    let dayProgress = sin(map(timeOfDay, dayLength / 4, dayLength / 2, -HALF_PI, HALF_PI));
-    r = lerp(red(sunriseColor), red(noonColor), dayProgress);
-    g = lerp(green(sunriseColor), green(noonColor), dayProgress);
-    b = lerp(blue(sunriseColor), blue(noonColor), dayProgress);
-  } else if (timeOfDay < (3 * dayLength) / 4) { // Sunset
-    let sunsetProgress = sin(map(timeOfDay, dayLength / 2, (3 * dayLength) / 4, -HALF_PI, HALF_PI));
-    r = lerp(red(noonColor), red(sunsetColor), sunsetProgress);
-    g = lerp(green(noonColor), green(sunsetColor), sunsetProgress);
-    b = lerp(blue(noonColor), blue(sunsetColor), sunsetProgress);
-  } else { // Night
-    let nightProgress = sin(map(timeOfDay, (3 * dayLength) / 4, dayLength, -HALF_PI, HALF_PI));
-    r = lerp(red(sunsetColor), red(nightColor), nightProgress);
-    g = lerp(green(sunsetColor), green(nightColor), nightProgress);
-    b = lerp(blue(sunsetColor), blue(nightColor), nightProgress);
-  }
-  background(r, g, b); // Set background color
-
-  // Draw tree animation
-  drawBaseStructure();
-  drawCircles();
-
-  // Control growth of circle sizes
-  for (let i = 0; i < circleSizes.length; i++) {
-    if (circleSizes[i] < maxSize) {
-      circleSizes[i] += growthSpeed;
->>>>>>> Stashed changes
     }
   }
 }
 
 // Draw the base structure (flowerpot)
-<<<<<<< Updated upstream
 function drawBaseStructure(scaleFactor) {
   fill(150, 180, 100); // Pot color
   noStroke();
@@ -159,36 +161,20 @@ function drawBaseStructure(scaleFactor) {
   fill(80, 160, 90); // Green semi-circles
   for (let i = 0; i < 5; i++) {
     arc(width / 2 - 120 + i * 60, height - 150*scaleFactor, 60*scaleFactor, 60*scaleFactor, PI, 0);
-=======
-function drawBaseStructure() {
-  fill(150, 180, 100); // Pot color
-  noStroke();
-  rectMode(CENTER);
-  rect(width / 2, height - 150, 300, 80);
-
-  fill(80, 160, 90); // Green semi-circles
-  for (let i = 0; i < 5; i++) {
-    arc(width / 2 - 120 + i * 60, height - 150, 60, 60, PI, 0);
->>>>>>> Stashed changes
   }
 
   fill(200, 60, 60); // Red semi-circles
   for (let i = 0; i < 4; i++) {
-<<<<<<< Updated upstream
     arc(width / 2 - 90 + i * 60, height - 150*scaleFactor, 60*scaleFactor, 60*scaleFactor, 0, PI);
   }
 
   // The circle refreshes, to change the speed of this the number after framecount needs to be changed.
-  if (frameCount % 100 ===maxSize){
-    resetCircleSize()
-=======
-    arc(width / 2 - 90 + i * 60, height - 150, 60, 60, 0, PI);
->>>>>>> Stashed changes
+  if (frameCount % 100 === maxSize){
+    resetCircleSize();
   }
 }
 
 // Draw circles for tree trunk and branches with noise-based sway
-<<<<<<< Updated upstream
 function drawCircles(scaleFactor) {
   let currentIndex = 0;
   let circleSize = 50*scaleFactor;
@@ -211,8 +197,8 @@ function drawCircles(scaleFactor) {
   drawHorizontalCircles(width / 2, height - 550*scaleFactor, 2, circleSize, 1, currentIndex, scaleFactor);
 
   // The circle refreshes, to change the speed of this the number after framecount needs to be changed.
-  if (frameCount % 100 ===maxSize){
-    resetCircleSize()
+  if (frameCount % 100 === maxSize){
+    resetCircleSize();
   }
 }
 
@@ -223,75 +209,27 @@ function drawVerticalCircles(x, y, count, size, indexStart, scaleFactor) {
   for (let i = 0; i < count; i++) {
     let noiseX = map(noise(noiseOffsets[indexStart + i] + frameCount * 0.01), 0, 1, -10*scaleFactor, 10*scaleFactor);
     let noiseY = map(noise(noiseOffsets[indexStart + i] + 1000 + frameCount * 0.01), 0, 1, -10*scaleFactor, 10*scaleFactor);
-=======
-function drawCircles() {
-  let currentIndex = 0;
-  let circleSize = 50;
-
-  drawVerticalCircles(width / 2, height - 200, 6, circleSize, currentIndex);
-  currentIndex += 6;
-
-  drawHorizontalCircles(width / 2, height - 450, 4, circleSize, -1, currentIndex);
-  currentIndex += 4;
-  drawHorizontalCircles(width / 2, height - 450, 4, circleSize, 1, currentIndex);
-  currentIndex += 4;
-
-  drawHorizontalCircles(width / 2, height - 350, 3, circleSize, -1, currentIndex);
-  currentIndex += 3;
-  drawHorizontalCircles(width / 2, height - 350, 3, circleSize, 1, currentIndex);
-  currentIndex += 3;
-
-  drawHorizontalCircles(width / 2, height - 550, 2, circleSize, -1, currentIndex);
-  currentIndex += 2;
-  drawHorizontalCircles(width / 2, height - 550, 2, circleSize, 1, currentIndex);
-}
-
-// Draw vertical circles (trunk) with sway effect
-function drawVerticalCircles(x, y, count, size, indexStart) {
-  let sway = map(noise(swayNoiseOffset + frameCount * 0.01), 0, 1, -5, 5); // Calculate sway
-
-  for (let i = 0; i < count; i++) {
-    let noiseX = map(noise(noiseOffsets[indexStart + i] + frameCount * 0.01), 0, 1, -10, 10);
-    let noiseY = map(noise(noiseOffsets[indexStart + i] + 1000 + frameCount * 0.01), 0, 1, -10, 10);
->>>>>>> Stashed changes
     let circleSize = circleSizes[indexStart + i];
     drawColoredCircle(x + noiseX + sway, y - i * size * 1.2 + noiseY, circleSize);
 
     if (i > 0) {
-<<<<<<< Updated upstream
-      drawLine(x + sway, y - (i - 1) * size * 1.2, x + sway, y - i * size * 1.2), scaleFactor;
-=======
       drawLine(x + sway, y - (i - 1) * size * 1.2, x + sway, y - i * size * 1.2);
->>>>>>> Stashed changes
     }
   }
 }
 
 // Draw horizontal circles (branches) with sway effect
-<<<<<<< Updated upstream
 function drawHorizontalCircles(x, y, count, size, direction, indexStart, scaleFactor) {
   let sway = map(noise(swayNoiseOffset + frameCount * 0.01), 0, 1, -5*scaleFactor, 5*scaleFactor); // Calculate sway
 
   for (let i = 1; i <= count; i++) {
     let noiseX = map(noise(noiseOffsets[indexStart + i - 1] + frameCount * 0.01), 0, 1, -10*scaleFactor, 10*scaleFactor);
     let noiseY = map(noise(noiseOffsets[indexStart + i - 1] + 1000 + frameCount * 0.01), 0, 1, -10*scaleFactor, 10*scaleFactor);
-=======
-function drawHorizontalCircles(x, y, count, size, direction, indexStart) {
-  let sway = map(noise(swayNoiseOffset + frameCount * 0.01), 0, 1, -5, 5); // Calculate sway
-
-  for (let i = 1; i <= count; i++) {
-    let noiseX = map(noise(noiseOffsets[indexStart + i - 1] + frameCount * 0.01), 0, 1, -10, 10);
-    let noiseY = map(noise(noiseOffsets[indexStart + i - 1] + 1000 + frameCount * 0.01), 0, 1, -10, 10);
->>>>>>> Stashed changes
     let xPos = x + i * size * 1.2 * direction + noiseX + sway;
     let circleSize = circleSizes[indexStart + i - 1];
     drawColoredCircle(xPos, y + noiseY, circleSize);
 
-<<<<<<< Updated upstream
-    drawLine(x + sway, y, xPos, y + noiseY, scaleFactor);
-=======
     drawLine(x + sway, y, xPos, y + noiseY);
->>>>>>> Stashed changes
   }
 }
 
@@ -311,22 +249,16 @@ function drawLine(x1, y1, x2, y2) {
   line(x1, y1, x2, y2);
 }
 
-<<<<<<< Updated upstream
 // Initialise Clouds
 function initaliseClouds(){
   clouds = []; // This clears the excisiting clouds
-  for (let i= 0; i<5; i++){
+  for (let i = 0; i < 5; i++){
     clouds.push(new Cloud(random(width), random(50,150)));
   }
 }
 
-
 // The circles get reset with this function.
 function resetCircleSize(){
-=======
-// Reset circle sizes on mouse click
-function mousePressed() {
->>>>>>> Stashed changes
   for (let i = 0; i < circleSizes.length; i++) {
     circleSizes[i] = 0;
   }
@@ -335,8 +267,5 @@ function mousePressed() {
 // Adjust canvas size on window resize
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-<<<<<<< Updated upstream
-  initaliseClouds() // The clouds get reset everytime the canvas gets adjusted.
-=======
->>>>>>> Stashed changes
+  initaliseClouds(); // The clouds get reset everytime the canvas gets adjusted.
 }
