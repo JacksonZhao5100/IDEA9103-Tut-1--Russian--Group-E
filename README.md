@@ -4,7 +4,7 @@
 The artwork that we chose is Apple Tree by Anwar Jalal Shemza.
 Apple Tree was created in 1962, which is a part of exploration of organic forms. In Apple Tree, Anwar uses repeated circular and linear patterns to represent the structure of tree, which created a sense of balance and rhythm.
 
-This artwork is shown below:
+This artwork is shown b:
 
 
 <img src="Images/Anwar%20Jalal%20Shemza%20Apple%20Tree.jpeg" alt="" width="400">
@@ -44,6 +44,9 @@ In the coding part, the group plans to create a drawing class which contain the 
 
 ## Section 3: Implementation
 "Show iterations of your process to achieve the outcome. This should include some screen shots of outputs of different stages of your work. If your group’s design wasn't fully realised in code, still showcase your intentions as well as the results you were able to achieve and iterations to get there. Highlight how you were or weren’t able to able to stick to your planning in section 1."
+<img src="Images\Screenshot of the iteration process 1.png" alt="" width="400">
+<img src="Images\Screenshot 2 .png" alt="" width="400">
+<img src="Images\screenshot 3 .png" alt="" width="400">
 
 ## Section 4: Technical Overview
 "Create a comprehensive overview of how your final group code works. This should contain code snippets (screenshots of code or text), along with explanations of each. You can also create an overall flowchart or visual map showing the major sections of your code and how they relate to each other."
